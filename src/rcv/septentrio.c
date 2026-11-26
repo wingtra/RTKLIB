@@ -911,7 +911,10 @@ extern int input_sbff(raw_t *raw, FILE *fp)
         raw->nbyte=0;
         return -1;
     }
-    if (fread(raw->buff+8,raw->len-8,1,fp)<1) return -2;
+    if (fread(raw->buff+8,raw->len-8,1,fp)<1) {
+        raw->nbyte=0;
+        return -2;
+    }
     raw->nbyte=0;
     
     /* decode SBF block */
